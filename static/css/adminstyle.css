@@ -1,0 +1,28 @@
+body{
+    background-color: rgb(29, 25, 25);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif !important;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color: rgb(228, 224, 224);
+}
+.table{
+    margin-top: 50px;
+    
+}
+tr{
+    background-color:rgb(29, 25, 25);
+}
+td{
+    border: solid rgb(151, 29, 90) 2px;
+    padding: 12px;
+}
+header{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif !important ; 
+    font-size: 50px;
+    color: rgb(151, 29, 90) !important;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
