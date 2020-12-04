@@ -42,29 +42,31 @@ app.get("/register", function (req, res) {
 });
 
 app.post("/register", function (req, res) {
-  let login = req.body.login;
-  console.log(login);
-  let password = req.body.password;
+  let owned = false;
   for (let i = 0; i < users.length; i++) {
-    if (login == users[i].login) {
-      res.send("istnieje uzytkownik z takim loginem");
-    } else {
-      let student = "";
-      if (req.body.student == undefined) {
-        student = "";
-      } else {
-        student = "checked";
-      }
-      users.push({
-        id: users.length,
-        login: req.body.login,
-        password: req.body.password,
-        age: req.body.age,
-        student: student,
-        gender: req.body.gender,
-      });
-      res.send("rejestracja udana");
+    if (req.body.login == users[i].login) {
+      owned = true;
+      break;
     }
+  }
+  if (owned) {
+    res.send("istnieje uzytkownik z takim loginem");
+  } else {
+    let student;
+    if (req.body.student == undefined) {
+      student = "";
+    } else {
+      student = "checked";
+    }
+    users.push({
+      id: users.length,
+      login: req.body.login,
+      password: req.body.password,
+      age: req.body.age,
+      student: student,
+      gender: req.body.gender,
+    });
+    res.send("rejestracja udana");
   }
 });
 
@@ -244,7 +246,7 @@ app.post("/sort", function (req, res) {
 //gender--------------------------------------------------------------
 
 app.get("/gender", function (req, res) {
-  for (let i = 0; i < users.length; i++) console.log(users[i].gender)
+  for (let i = 0; i < users.length; i++) console.log(users[i].gender);
   if (logged) {
     let tabK = '<table class="table" >';
     let tabM = '<table class="table" >';
@@ -254,21 +256,21 @@ app.get("/gender", function (req, res) {
         case "k":
           tabK += `<tr><td class="td">id: ${users[i].id}
                     </td><td>plec: ${users[i].gender}
-                    </td></tr>`
-                    break;
+                    </td></tr>`;
+          break;
         case "m":
           tabM += `<tr><td class="td">id: ${users[i].id}
                     </td><td>plec: ${users[i].gender}
-                    </td></tr>`
-                    break;
+                    </td></tr>`;
+          break;
         case "o":
           tabO += `<tr><td class="td">id: ${users[i].id}
                     </td><td>plec: ${users[i].gender}
-                    </td></tr>`
-                    break;
-        default:res.sendFile(path.join(__dirname + "/private/adminNoAccess.html"));
+                    </td></tr>`;
+          break;
+        default:
+          res.sendFile(path.join(__dirname + "/private/adminNoAccess.html"));
       }
-
     }
     tabK += "</table>";
     tabM += "</table>";
